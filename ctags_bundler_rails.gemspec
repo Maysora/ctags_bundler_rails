@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.authors     = ["Roy Hadrianoro"]
   s.email       = 'dev@maysora.com'
   s.files       = Dir.glob("lib/**/*.*")
-  s.homepage    = 'http://www.maysora.com'
+  s.homepage    = 'https://github.com/Maysora/ctags_bundler_rails'
   s.license     = 'MIT'
 
   s.add_dependency 'bundler', '>= 1.0'

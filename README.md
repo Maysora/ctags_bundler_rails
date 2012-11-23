@@ -8,6 +8,12 @@ Originally used for [Sublime Text 2](http://sublimetext.com) with [CTags package
 
 * [Exuberant CTags](http://ctags.sourceforge.net)
 
+## Installation
+
+Add to ```Gemfile```
+
+    gem 'ctags_bundler_rails', :git => 'git://github.com/Maysora/ctags_bundler_rails.git', :group => :development
+
 ## Usage
 
     rake ctags:project # generate .tags for the project
