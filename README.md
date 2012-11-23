@@ -12,7 +12,7 @@ Originally used for [Sublime Text 2](http://sublimetext.com) with [CTags package
 
 Add to ```Gemfile```
 
-    gem 'ctags_bundler_rails', :git => 'git://github.com/Maysora/ctags_bundler_rails.git', :group => :development
+    gem 'ctags_bundler_rails', :group => :development
 
 ## Usage
 
