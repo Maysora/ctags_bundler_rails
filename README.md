@@ -20,8 +20,6 @@ Add to ```Gemfile```
     rake ctags:gems    # generate .gemtags for all gems in gemfile
     rake ctags:all     # generate both .tags and .gemtags
     
-It's also possible to specify tags filename, for example:
+It's also possible to change gem path to somewhere else, for example:
 
-    rake ctags:project filename=project.tags
-    rake ctags:gems filename=gems.tags
-    rake ctags:all filename=all.tags
+    rake ctags:all CTAGS_GEM_PATH=C:/your-awesome-ruby-dir/lib/ruby/gems/1.9.1/gems
