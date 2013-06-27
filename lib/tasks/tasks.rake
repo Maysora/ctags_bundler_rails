@@ -1,18 +1,15 @@
 namespace :ctags do
   desc 'Build tags for project files and gems in gemfile'
   task :all do
-    paths = Bundler.load.specs.reject{|s| s.name == 'rails_ctags_bundler'}.map(&:full_gem_path)
-    paths << Rails.root unless ENV['filename'].nil?
-    Dir.chdir Rails.root do
-      system("ctags -R -f #{ENV['filename'] || '.gemtags'} #{paths.join(' ')}")
-      system("ctags -R -f .tags #{Rails.root}") if ENV['filename'].nil?
+    %w(project gems).each do |t|
+      Rake::Task["ctags:#{t}"].execute
     end
   end
 
   desc 'Build tags for project files'
   task :project do
     Dir.chdir Rails.root do
-      system("ctags -R -f #{ENV['filename'] || '.tags'} #{Rails.root}")
+      system("ctags -R -f .tags #{Rails.root}")
     end
   end
 
@@ -20,7 +17,15 @@ namespace :ctags do
   task :gems do
     Dir.chdir Rails.root do
       paths = Bundler.load.specs.reject{|s| s.name == 'rails_ctags_bundler'}.map(&:full_gem_path)
-      system("ctags -R -f #{ENV['filename'] || '.gemtags'} #{paths.join(' ')}")
+      system("ctags -R -f .gemtags #{paths.join(' ')}")
+
+      if ENV['CTAGS_GEM_PATH'].present? && paths.present?
+        current_gem_path = File.dirname(paths.first)
+        if current_gem_path != ENV['CTAGS_GEM_PATH']
+          original = File.read(".gemtags")
+          File.open(".gemtags", "w"){|f| f.write original.gsub(current_gem_path, ENV["CTAGS_GEM_PATH"])}
+        end
+      end
     end
   end
 end
