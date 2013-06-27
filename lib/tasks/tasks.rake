@@ -9,7 +9,7 @@ namespace :ctags do
   desc 'Build tags for project files'
   task :project do
     Dir.chdir Rails.root do
-      system("ctags -R -f .tags #{Rails.root}")
+      system("ctags -R -f .tags .")
     end
   end
 
