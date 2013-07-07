@@ -23,6 +23,14 @@ namespace :ctags do
         current_gem_path = File.dirname(paths.first)
         if current_gem_path != ENV['CTAGS_GEM_PATH']
           original = File.read(".gemtags")
+          if String.method_defined?(:encode)
+            original.encode!('UTF-16', 'UTF-8', :invalid => :replace, :replace => '')
+            original.encode!('UTF-8', 'UTF-16')
+          else
+            require 'iconv'
+            ic = Iconv.new('UTF-8', 'UTF-8//IGNORE')
+            original = ic.iconv(original)
+          end
           File.open(".gemtags", "w"){|f| f.write original.gsub(current_gem_path, ENV["CTAGS_GEM_PATH"])}
         end
       end
