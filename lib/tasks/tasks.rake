@@ -19,8 +19,7 @@ namespace :ctags do
       paths = Bundler.load.specs.reject{|s| s.name == 'rails_ctags_bundler'}.map(&:full_gem_path)
       system("ctags -R -f .gemtags #{paths.join(' ')}")
 
-      if ENV['CTAGS_GEM_PATH'].present? && paths.present?
-        current_gem_path = File.dirname(paths.first)
+      if ENV['CTAGS_GEM_PATH'].present? && (current_gem_path = Gem.path.detect{|p| File.exists? p})
         if current_gem_path != ENV['CTAGS_GEM_PATH']
           original = File.read(".gemtags")
           if String.method_defined?(:encode)

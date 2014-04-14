@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 Gem::Specification.new do |s|
   s.name        = 'ctags_bundler_rails'
-  s.version     = '1.0.2'
-  s.date        = '2013-06-27'
+  s.version     = '2.0.0'
+  s.date        = '2014-04-14'
   s.summary     = "Add rake task for generating ctags from bundler"
   s.description = "Add rake task for generating ctags from bundler"
   s.authors     = ["Roy Hadrianoro"]
